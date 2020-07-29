@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
+import Registration from './pages/Registration';
 
 class App extends React.Component {
     constructor(props) {
@@ -13,6 +14,9 @@ class App extends React.Component {
         return (
             <div className='App'>
                 <Switch>
+                    <Route path='/registration'>
+                        <Registration />
+                    </Route>
                     <Route path='/'>
                         <Home />
                     </Route>
