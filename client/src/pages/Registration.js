@@ -15,13 +15,63 @@ class Registration extends React.Component {
 
         // Binds method to class
         this.handleChange = this.handleChange.bind(this);
+        this.checkForNullValues = this.checkForNullValues.bind(this);
+        this.checkPassword = this.checkPassword.bind(this);
+        this.submitRegistration = this.submitRegistration.bind(this);
     }
 
     // Handles Changes to the form inputs
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value }, () => {
-            console.log(this.state);
-        });
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    checkForNullValues() {
+        if (this.state.firstName === null || '') {
+            return 'Please enter a value for the first name field.';
+        } else if (this.state.lastName === null || '') {
+            return 'Please enter a value for the last name field.';
+        } else if (this.state.username === null || '') {
+            return 'Please enter a value for the username field.';
+        } else if (this.state.password === null || '') {
+            return 'Please enter a value for the password field.';
+        } else if (this.state.confirmPassword === null || '') {
+            return 'Please enter a value for the confirm password field.';
+        } else if (this.state.location === null) {
+            return 'Please select a location.';
+        } else if (this.state.role === null) {
+            return 'Please select a role.';
+        } else {
+            return false;
+        }
+    }
+
+    checkPassword() {
+        if (this.state.password.length < 8) {
+            return 'Please choose a password that is at least 8 characters.';
+        }
+
+        if (this.state.password !== this.state.confirmPassword) {
+            return 'Passwords do not match.';
+        }
+
+        return false;
+    }
+
+    submitRegistration(event) {
+        event.preventDefault();
+        let result = this.checkForNullValues();
+        if (result) {
+            alert(result);
+            return;
+        }
+
+        result = this.checkPassword();
+        if (result) {
+            alert(result);
+            return;
+        }
+
+        console.log('Registration Submitted');
     }
 
     render() {
@@ -143,7 +193,10 @@ class Registration extends React.Component {
                                             </select>
                                         </div>
                                     </div>
-                                    <button className='btn btn-primary btn-block'>
+                                    <button
+                                        onClick={this.submitRegistration}
+                                        className='btn btn-primary btn-block'
+                                    >
                                         Submit
                                     </button>
                                 </form>
