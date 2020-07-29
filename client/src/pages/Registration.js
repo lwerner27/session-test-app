@@ -71,7 +71,17 @@ class Registration extends React.Component {
             return;
         }
 
-        console.log('Registration Submitted');
+        fetch('/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state),
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+            });
     }
 
     render() {

@@ -1,22 +1,26 @@
 const router = require('express').Router();
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
 
 // Route for handling user registration.
 router.post('/register', (req, res) => {
-    let { firstName, lastName, username, password, location } = req.body;
+    console.log('/register route hit.');
+    let { firstName, lastName, username, password, location, role } = req.body;
 
     let userData = {
         firstName,
         lastName,
         username,
-        password,
+        password: bcrypt.hashSync(password, 10),
         location,
+        role,
     };
 
     let newUser = new User(userData);
     newUser
         .save()
         .then((user) => {
-            return res.status(201).json('signup successful');
+            return res.status(201).json({ msg: 'Registration successful.' });
         })
         .catch((error) => {
             if (error.code === 11000) {
@@ -25,12 +29,27 @@ router.post('/register', (req, res) => {
                         'There is already an account associated with this username.',
                 });
             } else {
+                console.log(error);
                 return res.status(400).json({
                     msg:
                         'There was a problem with your registration please try again later.',
                 });
             }
         });
+});
+
+router.post('/proxy', (req, res) => {
+    const {
+        firstName,
+        lastName,
+        username,
+        password,
+        location,
+        role,
+    } = req.body;
+
+    console.log(firstName, lastName, username, password, location, role);
+    res.status(200).json({ msg: 'Your request was recieved.' });
 });
 
 module.exports = router;
