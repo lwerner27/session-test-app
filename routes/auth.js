@@ -20,17 +20,21 @@ router.post('/register', (req, res) => {
     newUser
         .save()
         .then((user) => {
-            return res.status(201).json({ msg: 'Registration successful.' });
+            return res
+                .status(201)
+                .json({ success: true, msg: 'Registration successful.' });
         })
         .catch((error) => {
             if (error.code === 11000) {
                 return res.status(400).json({
+                    success: false,
                     msg:
                         'There is already an account associated with this username.',
                 });
             } else {
                 console.log(error);
                 return res.status(400).json({
+                    success: false,
                     msg:
                         'There was a problem with your registration please try again later.',
                 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Registration extends React.Component {
     constructor(props) {
@@ -80,7 +81,12 @@ class Registration extends React.Component {
         })
             .then((res) => res.json())
             .then((res) => {
-                console.log(res);
+                if (res.success) {
+                    alert(res.msg);
+                    this.props.history.push('/');
+                } else {
+                    alert(res.msg);
+                }
             });
     }
 
@@ -219,4 +225,4 @@ class Registration extends React.Component {
     }
 }
 
-export default Registration;
+export default withRouter(Registration);
