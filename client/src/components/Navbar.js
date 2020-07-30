@@ -35,7 +35,9 @@ const Navbar = ({ toggleBurger, burgerActive }) => {
 
             <div
                 id='navbarBasicExample'
-                className={`navbar-menu ${burgerActive ? 'is-active' : ''}`}
+                className={`navbar-menu is-link ${
+                    burgerActive ? 'is-active' : ''
+                }`}
             >
                 <div className='navbar-end'>
                     <div className='navbar-item'>
@@ -43,9 +45,9 @@ const Navbar = ({ toggleBurger, burgerActive }) => {
                             <Link
                                 to='/registration'
                                 as='a'
-                                className='button is-link'
+                                className='button is-white'
                             >
-                                <strong>Register</strong>
+                                Register
                             </Link>
                             <Link
                                 to='/login'

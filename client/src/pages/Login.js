@@ -59,7 +59,7 @@ class Login extends React.Component {
                                 </div>
                                 <div className='columns'>
                                     <div className='column'>
-                                        <button className='button is-link'>
+                                        <button className='button is-link is-fullwidth'>
                                             Submit
                                         </button>
                                     </div>
