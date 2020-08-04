@@ -23,7 +23,6 @@ class Registration extends React.Component {
 
     // Handles Changes to the form inputs
     handleChange(event) {
-        console.log(event.target.name);
         this.setState({ [event.target.name]: event.target.value });
     }
 
